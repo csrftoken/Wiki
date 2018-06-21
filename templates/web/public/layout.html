@@ -1,0 +1,18 @@
+{% extends 'web/public/base.html' %}
+{% load staticfiles %}
+{% load web %}
+{% block header %}
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <img class="logo-img" src="{% static 'imgs/logo.png' %}" width="40" height="40">
+  {% get_book_header %}
+{% endblock %}
+{% block content %}
+  <div class="book">
+    <div class="book-summary">
+      {% get_book_summary %}
+    </div>
+    <div class="book-body">
+      {% block book_body %}{% endblock %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuffyWiki|Admin</title>
+  <link rel="shortcut icon" href=//hcdn1.luffycity.com/static/frontend/index/Luffy-study-logo.png>
+  <!--Bootstrap Stylesheet [ REQUIRED ]-->
+  <link href="{% static 'management/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!--Nifty Stylesheet [ REQUIRED ]-->
+  <link href="{% static 'management/css/nifty.min.css' %}" rel="stylesheet">
+  <!--Premium Icons [ OPTIONAL ]-->
+  <link href="{% static 'management/premium/icon-sets/icons/line-icons/premium-line-icons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'management/premium/icon-sets/icons/solid-icons/premium-solid-icons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'management/css/themes/type-b/theme-light.min.css' %}" rel="stylesheet">
+  <!--Page Load Progress Bar [ OPTIONAL ]-->
+  <link href="{% static 'management/css/pace.min.css' %}" rel="stylesheet">
+  <link href="{% static 'public/css/font-awesome.min.css' %}" rel="stylesheet">
+  <!--JAVASCRIPT-->
+  <!--jQuery [ REQUIRED ]-->
+  <script src="{% static 'public/js/jquery.min.js' %}"></script>
+  <script src="{% static 'public/js/jquery.cookie.js' %}"></script>
+  <!--BootstrapJS [ RECOMMENDED ]-->
+  <script src="{% static 'public/js/bootstrap.min.js' %}"></script>
+  <!--Nifty Admin [ RECOMMENDED ]-->
+  <script src="{% static 'management/js/pace.min.js' %}"></script>
+  <script src="{% static 'management/js/nifty.min.js' %}"></script>
+  <!--=================================================-->
+  {% block css %}{% endblock %}
+</head>
+<body>
+{% block body %}admin body {% endblock %}
+<script>
+  $(document).ready(function () {
+    // menu highlight
+    var active_menu = $("#mainnav-menu a[href='{{ request.path }}']");
+    active_menu.parent().addClass("active-link");
+    active_menu.parent().parent().addClass("in");
+  });//end doc ready
+</script>
+{% block js %}{% endblock %}
+</body>
+</html>

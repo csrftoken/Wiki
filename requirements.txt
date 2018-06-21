@@ -1,0 +1,6 @@
+Django==1.11.3
+django-js-asset==1.1.0
+PyMySQL==0.7.11
+six==1.10.0
+django-ckeditor==5.5.0
+pillow==4.3.0

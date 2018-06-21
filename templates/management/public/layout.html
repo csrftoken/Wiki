@@ -1,0 +1,158 @@
+{% extends 'management/public/base.html' %}
+{% block body %}
+  <div id="container" class="effect mainnav-lg navbar-fixed mainnav-fixed">
+    <header id="navbar">
+      <div id="navbar-container" class="boxed">
+        <div class="navbar-header">
+          <a href="" class="navbar-brand">
+            <div class="brand-title">
+              <span class="brand-text">LuffyWiki Admin</span>
+            </div>
+          </a>
+        </div>
+        <div class="navbar-content clearfix">
+          <ul class="nav navbar-top-links pull-left">
+            <li class="tgl-menu-btn">
+              <a class="mainnav-toggle" href="#">
+                <i class="pli-view-list icon-lg"></i>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav navbar-top-links pull-right">
+            <li id="dropdown-user" class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                <span class="pull-right">
+                  <i class="pli-male ic-user"></i>
+                </span>
+                <div class="username hidden-xs">{{ request.user.username }}</div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
+                <!-- User dropdown menu -->
+                <ul class="head-list">
+                  <li>
+                    <a href="#">
+                      <i class="pli-male icon-fw icon-lg"></i> Profile
+                    </a>
+                  </li>
+                </ul>
+                <div class="pad-all text-right">
+                  <a href="{% url 'logout' %}" class="btn btn-primary">
+                    <i class="pli-unlock icon-fw"></i> Logout
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="boxed">
+      <div id="content-container">
+        <div id="page-title">
+          <h1 class="page-header text-overflow">{% block page-title-text %}page title{% endblock %}</h1>
+        </div>
+        {% block breadcrumb %}{% endblock %}
+        <div id="page-content">
+          {% block page-content %}{% endblock %}
+        </div>
+      </div>
+      <nav id="mainnav-container">
+        <div id="mainnav">
+          <!--Menu-->
+          <!--================================-->
+          <div id="mainnav-menu-wrap">
+            <div class="nano">
+              <div class="nano-content">
+                <!--Profile Widget-->
+                <!--================================-->
+                <div id="mainnav-profile" class="mainnav-profile">
+                  <div id="profile-nav" class="collapse list-group bg-trans">
+                    <a href="#" class="list-group-item">
+                      <i class="pli-wallet icon-lg icon-fw"></i> Link 1
+                    </a>
+                    <a href="#" class="list-group-item">
+                      <i class="pli-calculator-2 icon-lg icon-fw"></i> Link 2
+                    </a>
+                    <a href="#" class="list-group-item">
+                      <i class="pli-coin icon-lg icon-fw"></i> Link 3
+                    </a>
+                  </div>
+                </div>
+                <!--Shortcut buttons-->
+                <!--================================-->
+                <div id="mainnav-shortcut">
+                  <ul class="list-unstyled">
+                    <li class="col-xs-4" data-content="go luffycity.com">
+                      <a class="shortcut-grid" target="_blank" href="http://luffycity.com">
+                        <i class="fa fa-desktop"></i>
+                      </a>
+                    </li>
+                    <li class="col-xs-4" data-content="Shortcut 2">
+                      <a class="shortcut-grid" href="#">
+                        <i class="psi-data-stream"></i>
+                      </a>
+                    </li>
+                    <li class="col-xs-4" data-content="Shortcut 3">
+                      <a class="shortcut-grid" href="#">
+                        <i class="psi-phone-sms"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!--================================-->
+                <!--End shortcut buttons-->
+                <ul id="mainnav-menu" class="list-group">
+                  <!--Menu list item-->
+                  <li class="">
+                    <a href="{% url 'dashboard' %}">
+                      <i class="fa fa-tachometer"></i>
+                      <span class="menu-title">Dashboard</span>
+                    </a>
+                  </li>
+                  <!--Menu list item-->
+                  <li class="hide">
+                    <a href="#">
+                      <i class="fa fa-area-chart"></i>
+                      <span class="menu-title">综合数据</span>
+                      <i class="arrow"></i>
+                    </a>
+                    <!--Submenu-->
+                    <ul class="collapse ">
+                      <li><a href="#">Link</a></li>
+                      <li class="active-link"><a href="#">Active link</a></li>
+
+                    </ul>
+                  </li>
+                  <!--Menu list item-->
+                  <li class="">
+                    <a href="#">
+                      <i class="fa fa-mortar-board"></i>
+                      <span class="menu-title">wiki文档管理</span>
+                      <i class="arrow"></i>
+                    </a>
+                    <!--Submenu-->
+                    <ul class="collapse">
+                      <li><a href="{% url 'table_list' 'web' 'book' %}">课程列表</a></li>
+                      <li><a href="{% url 'table_list' 'web' 'bookchapter' %}">章节管理</a></li>
+                      <li><a href="{% url 'table_list' 'web' 'booksection' %}">课时管理</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!--================================-->
+          <!--End menu-->
+        </div>
+      </nav>
+    </div>
+    <footer id="footer">
+      <div class="hide-fixed pull-right pad-rgt">
+        &#0169; 2017 - 2018 By LuffyCity
+      </div>
+    </footer>
+    <button class="scroll-top btn">
+      <i class="pci-chevron chevron-up"></i>
+    </button>
+  </div>
+{% endblock %}

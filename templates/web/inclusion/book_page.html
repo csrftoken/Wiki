@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<div class="book-page-left">
+  {% if prev_section %}
+    <img src="{% static 'imgs/left.svg' %}">
+    <a href="{% url 'article-detail' prev_section.pk %}">
+      <span>{{ prev_section.name }}</span>
+    </a>
+  {% endif %}
+</div>
+<div class="book-page-right">
+  {% if next_section %}
+    <img src="{% static 'imgs/right.svg' %}">
+    <a href="{% url 'article-detail' next_section.pk %}">
+      <span>{{ next_section.name }}</span>
+    </a>
+  {% endif %}
+</div>

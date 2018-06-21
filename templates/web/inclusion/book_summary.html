@@ -1,0 +1,26 @@
+<ul class="summary">
+  <li>
+    <a href="{% url 'book' book.name %}">首页</a>
+  </li>
+  <li class="divider"></li>
+  {% for chapter in book.bookchapter_set.all %}
+    <li class="chapter">
+      <span>第{{ chapter.chapter }}章 {{ chapter.name }}</span>
+      <ul>
+        {% for section in chapter.booksection_set.all %}
+          {% if not section.status %}
+            <li class="chapter" data-path="{{ chapter.pk }}">
+              <a href="{% url 'article-detail' section.pk %}">
+                {{ chapter.chapter }}.{{ forloop.counter }} {{ section.name }}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </li>
+  {% endfor %}
+  <li class="divider"></li>
+  <li>
+    <span>本书 By LuffyCity</span>
+  </li>
+</ul>

@@ -1,0 +1,34 @@
+{% extends 'web/public/layout.html' %}
+{% load staticfiles %}
+{% load web %}
+{% block book_body %}
+  <div class="book-inner">
+    <div class="book-wrapper">
+      <div class="page-left">
+        <img class="js-toolbar-action" src="{% static 'imgs/shape.svg' %}">
+      </div>
+      <div class="page-inner">
+        <div class="book-page book-page-top">
+          {% get_book_page section %}
+        </div>
+        <div class="book-header">
+          <div class="book-title">
+            <span class="book-title-left">{{ section.name }}</span>
+            <span class="book-title-right">阅读量: {{ section.pv }}</span>
+          </div>
+          <div class="book-brief">
+            {{ section.memo }}
+          </div>
+        </div>
+        <div class="book-content">
+          <section class="">
+            {{ section.content|safe }}
+          </section>
+        </div>
+        <div class="book-page book-page-bottom">
+          {% get_book_page section %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

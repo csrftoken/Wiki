@@ -1,0 +1,271 @@
+body {
+  margin: 0;
+  padding-top: 80px;
+}
+
+a {
+  text-decoration: none;
+}
+
+section {
+  display: block;
+  word-wrap: break-word;
+  overflow: hidden;
+  color: #333;
+  line-height: 1.7;
+}
+
+pre {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+}
+
+code[class*="language-"], pre {
+  font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+  font-size: 14px;
+  line-height: 1.375;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  background: #f5f7ff;
+  color: #5e6687;
+}
+
+header {
+  width: 100%;
+  height: 80px;
+  box-shadow: 0 2px 4px 0 #C9C9C9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+}
+
+header ul {
+  padding: 0 !important;
+}
+
+header ul li {
+  list-style: none;
+  float: left;
+}
+
+header .menu {
+  line-height: 80px;
+  height: 80px;
+}
+
+header .logo-img {
+  float: left;
+  margin: 21px 0 0 50px;
+}
+
+header .logo-name {
+  margin-left: 13px;
+  margin-right: 40px;
+  color: #666666;
+  font-size: 18px;
+}
+
+header .menu .menu-item {
+  color: #7F7F7F;
+  font-size: 14px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.book {
+  width: 100%;
+  height: 100%;
+}
+
+.book .left {
+  left: -300px;
+}
+
+.book.with-summary .book-summary {
+  left: 0;
+}
+
+.book-summary {
+  position: fixed;
+  left: 0;
+  margin-top: 2px;
+  width: 300px;
+  color: #364149;
+  border-top: 1px solid rgba(0, 0, 0, .07);
+  border-right: 1px solid rgba(0, 0, 0, .07);
+  background: #fafafa;
+  font-size: 14px;
+  height: 100%;
+  overflow-y: auto;
+  transition: left 350ms ease;
+}
+
+@media (max-width: 1025px) {
+  .book-summary {
+    bottom: 0;
+    left: -100%;
+    top: 80px;
+  }
+}
+
+.book-summary ul.summary li.active > a {
+  color: #008cff;
+}
+
+.book-body {
+  position: absolute;
+  left: 300px;
+  top: 80px;
+  right: 0;
+  bottom: 0;
+  color: #000;
+  transition: left 350ms ease;
+}
+
+@media (max-width: 1240px) {
+  .book-body {
+    transition: transform 250ms ease;
+    padding-bottom: 20px;
+    left: 0;
+  }
+}
+
+.book-summary ul.summary {
+  padding: 0 !important;
+}
+
+.book-summary ul li {
+  list-style: none;
+}
+
+.book-summary ul.summary li.divider {
+  height: 1px;
+  margin: 7px 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, .07);
+}
+
+.book-summary ul.summary li a, .book-summary ul.summary li span {
+  display: block;
+  padding: 10px 15px;
+  border-bottom: none;
+  color: #4A4A4A;
+  background: 0 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.book-summary ul.summary li ul {
+  padding-left: 20px;
+}
+
+.chapter {
+  font-size: 14px;
+}
+
+.book-inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+.book-wrapper {
+  position: relative;
+  outline: 0;
+}
+
+.page-inner {
+  position: relative;
+  max-width: 995px;
+  margin: 0 auto;
+  padding: 20px 15px 40px 15px;
+}
+
+.book-page {
+  height: 62px;
+  background-color: #FAFAFA;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-page span {
+  color: #4A4A4A;
+  margin-left: 10px;
+}
+
+.book-page-top {
+  margin-bottom: 20px;
+}
+
+.book-page-bottom {
+  margin-top: 20px;
+}
+
+.book-page-left {
+  padding-left: 10px
+}
+
+.book-page-right {
+  padding-right: 10px;
+}
+
+.book-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.book-title-left {
+  color: #129DCE;
+  font-size: 36px;
+}
+
+.book-title-right {
+  color: #5E5E5E;
+  font-size: 20px;
+  margin-right: 0;
+}
+
+.book-brief {
+  margin-top: 20px;
+  color: #5E5E5E;
+  font-size: 16px;
+}
+
+.book-wrapper .page-left .js-toolbar-action {
+  position: absolute;
+  top: 34px;
+  left: 40px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+@media (max-width: 1240px) {
+  .book-wrapper .page-left .js-toolbar-action{
+    position: relative;
+    margin-bottom: 10px;
+    top: 15px;
+    left: 20px;
+  }
+}

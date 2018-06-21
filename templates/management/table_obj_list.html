@@ -1,0 +1,5 @@
+{% extends 'management/public/layout.html' %}
+{% block page-title-text %}{{ table_obj.admin_class.model_display_name }}{% endblock %}
+{% block page-content %}
+  {% include "kingadmin/components/object_list_table.html" %}
+{% endblock %}

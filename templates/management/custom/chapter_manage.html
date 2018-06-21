@@ -1,0 +1,159 @@
+{% extends 'management/public/layout.html' %}
+{% load staticfiles %}
+{% load manage %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'public/sweetalert/sweetalert.css' %}">
+  <link rel="stylesheet" href="{% static 'management/css/chapter_manage.css' %}">
+{% endblock %}
+{% block page-title-text %}
+  <h2 id="title">Wiki章节与课时管理</h2>
+{% endblock %}
+{% block page-content %}
+  <div class="panel page-inner">
+    <!-- 响应消息 -->
+    <h4 class="success-msg">{{ msg }}</h4>
+    <!-- 标题抬头 -->
+    <h3>
+      Wiki名称：{{ wiki_book.name }}
+      {% ifequal show_type 'default' %}
+        <a href="{% url 'table_list' 'web' 'book' %}"
+           class="pull-right btn btn-info btn-labeled fa fa-mail-reply back_btn">
+          返回
+        </a>
+      {% endifequal %}
+    </h3>
+    <!-- 默认展示的界面(循环展示章节和课时) -->
+    {% ifequal show_type 'default' %}
+      <div class="page-body">
+        <ol class="dd-list">
+          {% for item in data %}
+            <li class="dd-item dd3-item" data-id="{{ item.chapter.pk }}">
+              <div class="dd-handle dd3-handle">Drag</div>
+              <div class="dd3-content chapter_title">
+                第{{ item.chapter.chapter }}章 - {{ item.chapter.name }}
+                <a class="pull-right handle delete-button" del-type="chapter"  pk="{{ item.chapter.pk }}">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i> 删除
+                </a>
+                <a class="pull-right handle" href="?req_type=chapter_edit&pk={{ item.chapter.pk }}">
+                  <i class="fa fa-pencil" aria-hidden="true"></i> 编辑
+                </a>
+              </div>
+              <ol class="dd-list">
+                {% for section in item.chapter_sections %}
+                  <li class="dd-item dd3-item" data-id="{{ section.pk }}">
+                    <div class="dd-handle dd3-handle">Drag</div>
+                    <div class="dd3-content">
+                      第{{ section.order }}课时 - {{ section.name }}
+                      <a class="pull-right handle delete-button" del-type="section" pk="{{ section.pk }}">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        删除
+                      </a>
+                      <a class="pull-right handle" href="?req_type=section_edit&pk={{ section.pk }}">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                        编辑
+                      </a>
+                      <a class="pull-right handle" href="{% url 'article-detail' section.pk %}" target="_blank">
+                        <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                        文档预览
+                      </a>
+                    </div>
+                  </li>
+                  {% if forloop.last %}
+                    {% get_handle 'section_add' section.order section.chapter.pk %}
+                  {% endif %}
+                {% empty %}
+                  {% get_handle 'section_add' 0 item.chapter.pk %}
+                {% endfor %}
+              </ol>
+            </li>
+            {% if forloop.last %}
+              {% get_handle 'chapter_add' item.chapter.pk item.chapter.book.pk %}
+            {% endif %}
+          {% empty %}
+            {% get_handle 'chapter_add' 0 wiki_book.pk %}
+          {% endfor %}
+        </ol>
+      </div>
+      <!-- 添加OR编辑章节界面 AND 添加OR编辑课时界面 -->
+    {% else %}
+      <div class="form_panel">
+        <form action="" method="post" novalidate>
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="form-group">
+              <label for="{{ field.auto_id }}">{{ field.label }}</label>
+              {{ field }}
+              <span class="error">{{ field.errors.0 }}</span>
+            </div>
+          {% endfor %}
+          <input id="sub_btn" class="btn btn-success" type="submit" value="保存">
+          <button id="can_btn" class="btn btn-warning"><a href="{{ request.path }}">取消</a></button>
+        </form>
+      </div>
+    {% endifequal %}
+  </div>
+{% endblock %}
+{% block js %}
+  <script src="{% static 'public/sweetalert/sweetalert.min.js' %}"></script>
+  <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+  <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+  <script>
+    $(document).ready(function () {
+      bindReloadPage();
+      bindDeleteBtn();
+    });
+
+    // 页面重载
+    function bindReloadPage() {
+      if ($(".success-msg").text()) {
+        window.location.href = '{{ request.path }}'
+      }
+    }
+
+    // 章节OR课时删除
+    function bindDeleteBtn() {
+      $(".delete-button").click(function () {
+
+        let delType = $(this).attr('del-type');
+        let pk = $(this).attr("pk");
+
+        let self = $(this);
+
+        swal({
+          title: delType === 'chapter' ? '确定要删除此章节吗？': '确定要删除此课时吗？',
+          text: delType === 'chapter' ? '注意此章节下面的所有的课时都将被删除': '删除后将无法恢复',
+          type: 'warning',
+          showCancelButton: true,
+          closeOnConfirm: false,
+          confirmButtonText: '是的，我要删除！',
+          confirmButtonColor: '#ec6c62',
+          cancelButtonText: '容我三思一下'
+        }, function(isConfirm) {
+          if (!isConfirm) return;
+
+          let csrftoken = $.cookie("csrftoken");
+
+          $.ajax({
+            url: '',
+            type:'DELETE',
+            headers:{'X-CSRFToken': csrftoken},
+            data: {
+              'del_type': delType,
+              'pk': pk
+            },
+            success: function (data) {
+              if (data.status){
+                swal('删除成功', '', 'success');
+                $(self).parent().parent().remove();
+              }
+            },
+            error: function () {
+              swal('啊哦...','服务器异常...','error');
+            }
+          })
+
+        })
+      })
+    }
+  </script>
+{% endblock %}

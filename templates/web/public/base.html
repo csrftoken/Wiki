@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% block head %}
+  <title>{% block title %}LuffyWiki{% endblock %}</title>
+  <meta charset=utf-8>
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="//hcdn1.luffycity.com/static/frontend/index/Luffy-study-logo.png">
+  <link rel="stylesheet" href="{% static 'web/css/home.css' %}">
+  {% block css %}{% endblock %}
+{% endblock %}
+<body>
+<header>
+  {% block header %}{% endblock %}
+</header>
+<div id="content-container">
+  {% block content %}{% endblock %}
+</div>
+<script src="{% static 'public/js/jquery.min.js' %}"></script>
+<script src="{% static 'web/js/home.js' %}"></script>
+{% block js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,8 @@
+<div class="menu">
+  <a href="" class="logo-name">
+    路飞学城
+  </a>
+  {% for book in books %}
+    <a href="{% url 'book' book.name %}" class="menu-item">{{ book.name }}</a>
+  {% endfor %}
+</div>
